@@ -275,6 +275,13 @@ git config --global alias.f-del-br 'branch -D'
 # Использование: git f-del-br <branch-name>
 ```
 
+#### Alias для удаления как локальной, так и удаленной ветку
+
+```sh
+git config --global alias.del-remotebr '!f() { git branch -D "$1" && git push origin --delete "$1"; }; f'
+# Использование: git del-remotebr <branch-name>
+```
+
 #### Alias для отмены последнего коммита (изменения сохранятся в рабочей директории)
 
 ```sh
