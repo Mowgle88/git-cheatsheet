@@ -255,9 +255,9 @@ git config --global alias.rename-br '!f() { git branch -m \"$1\"; }; f'
 #### Alias для переименования удаленной ветки
 
 ```sh
-git config --global alias.rename-remotebr '!f() { git branch -m \"$1\" \"$2\" && git push origin --delete \"$1\" && git push origin -u \"$2\"; }; f'
+git config --global alias.rename-remotebr '!f() { if [ $# -eq 1 ]; then old_branch=$(git rev-parse --abbrev-ref HEAD); new_branch=\"$1\"; else old_branch=\"$1\"; new_branch=\"$2\"; fi; git branch -m \"$old_branch\" \"$new_branch\" && git push origin --delete \"$old_branch\" && git push origin -u \"$new_branch\"; }; f'
 # Использование: git rename-remotebr <new-branch-name> - если находитесь на текущей ветке
-# Использование: git rename-remotebr <old-branch-name> <new-branch-name>
+# Использование: git rename-remotebr <old-branch-name> <new-branch-name> - если находитесь на другой ветке
 
 ```
 
