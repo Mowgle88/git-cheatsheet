@@ -245,11 +245,20 @@ git config --global alias.newbr 'checkout -b'
 # Использование: git newbr <branch-name>
 ```
 
-#### Alias для переименования ветки
+#### Alias для переименования локальной ветки
 
 ```sh
-git config --global alias.rename-br '!f() { git branch -m "$1" "$2" && git push origin --delete "$1" && git push origin -u "$2"; }; f'
-# Использование: git rename-br <old-branch-name> <new-branch-name>
+git config --global alias.rename-br '!f() { git branch -m \"$1\"; }; f'
+# Использование: git rename-br <new-branch-name>
+```
+
+#### Alias для переименования удаленной ветки
+
+```sh
+git config --global alias.rename-remotebr '!f() { git branch -m \"$1\" \"$2\" && git push origin --delete \"$1\" && git push origin -u \"$2\"; }; f'
+# Использование: git rename-remotebr <new-branch-name> - если находитесь на текущей ветке
+# Использование: git rename-remotebr <old-branch-name> <new-branch-name>
+
 ```
 
 #### Alias для удаления локальной ветки
