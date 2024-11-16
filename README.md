@@ -84,6 +84,24 @@ git branch -d <branch-name>
 git branch -D <branch-name>
 ```
 
+### Переименование локальной ветки, на которой находитесь
+
+```sh
+git branch -m branch-name
+```
+
+### Переименование локальной ветки, если вы на другой ветке
+
+```sh
+git branch -m old-name new-name
+```
+
+### Переименование удаленной ветки (удалите удаленную ветку old-name и добавьте локальную ветку new-name)
+
+```sh
+git push origin :old-name new-name
+```
+
 ### Просмотр всех веток
 
 ```sh
