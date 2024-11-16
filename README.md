@@ -84,6 +84,24 @@ git branch -d <branch-name>
 git branch -D <branch-name>
 ```
 
+### Переименование локальной ветки, на которой находитесь
+
+```sh
+git branch -m branch-name
+```
+
+### Переименование локальной ветки, если вы на другой ветке
+
+```sh
+git branch -m old-name new-name
+```
+
+### Переименование удаленной ветки (удалите удаленную ветку old-name и добавьте локальную ветку new-name)
+
+```sh
+git push origin :old-name new-name
+```
+
 ### Просмотр всех веток
 
 ```sh
@@ -227,11 +245,20 @@ git config --global alias.newbr 'checkout -b'
 # Использование: git newbr <branch-name>
 ```
 
-#### Alias для переименования ветки
+#### Alias для переименования локальной ветки
 
 ```sh
-git config --global alias.rename-br '!f() { git branch -m "$1" "$2" && git push origin --delete "$1" && git push origin -u "$2"; }; f'
-# Использование: git rename-br <old-branch-name> <new-branch-name>
+git config --global alias.rename-br '!f() { git branch -m \"$1\"; }; f'
+# Использование: git rename-br <new-branch-name>
+```
+
+#### Alias для переименования удаленной ветки
+
+```sh
+git config --global alias.rename-remotebr '!f() { if [ $# -eq 1 ]; then old_branch=$(git rev-parse --abbrev-ref HEAD); new_branch=\"$1\"; else old_branch=\"$1\"; new_branch=\"$2\"; fi; git branch -m \"$old_branch\" \"$new_branch\" && git push origin --delete \"$old_branch\" && git push origin -u \"$new_branch\"; }; f'
+# Использование: git rename-remotebr <new-branch-name> - если находитесь на текущей ветке
+# Использование: git rename-remotebr <old-branch-name> <new-branch-name> - если находитесь на другой ветке
+
 ```
 
 #### Alias для удаления локальной ветки
@@ -246,6 +273,13 @@ git config --global alias.del-br 'branch -d'
 ```sh
 git config --global alias.f-del-br 'branch -D'
 # Использование: git f-del-br <branch-name>
+```
+
+#### Alias для удаления как локальной, так и удаленной ветку
+
+```sh
+git config --global alias.del-remotebr '!f() { git branch -D "$1" && git push origin --delete "$1"; }; f'
+# Использование: git del-remotebr <branch-name>
 ```
 
 #### Alias для отмены последнего коммита (изменения сохранятся в рабочей директории)
