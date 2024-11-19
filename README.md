@@ -296,6 +296,15 @@ git config --global alias.hard-undo 'reset --hard HEAD^1'
 # Использование: git hard-undo
 ```
 
+#### Alias для создания коммита feat, fix и т.п (изменения будут потеряны)
+
+```sh
+git config --global alias.feat '!f() { git commit -m "feat: $*"; }; f'
+git config --global alias.fix '!f() { git commit -m "fix: $*"; }; f'
+# Использование: git feat <message>
+# Использование: git fix <message>
+```
+
 ## Работа с Markdown
 
 - **Предпросмотр Markdown**: `Ctrl+Shift+V` (Windows/Linux) или `Cmd+Shift+V` (Mac)
